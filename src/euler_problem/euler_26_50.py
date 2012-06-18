@@ -24,23 +24,27 @@ def problem_30():
     return sum(filter(lambda i: i == sum([int(x)**5 for x in str(i)]), range(2,400000)))
 
 def problem_31():
-    s_currency=frozenset({1,2,5,10,20,50,100,200})
-    s_result=set()
-    #print(list(itertools.combinations_with_replacement(s_currency,2)))
-    for n in range(1,201):
-        for i in itertools.combinations_with_replacement(s_currency,n):         
-            i=tuple(sorted(i))            
-            if sum(i)==200 and i not in s_result:s_result.add(i)
-    return len(s_result)
-    #return len(list(sum(itertools.combinations_with_replacement(s_currency,i))==200 for i in range(1,201)))
+    target = 200
+    coins = [1,2,5,10,20,50,100,200]
+    ways = [1]+[0]*target
+    for coin in coins:
+        for i in range(coin, target+1):
+            ways[i] += ways[i-coin]
+    return ways[target]
 
 def problem_32():
-    i_str="123456789"
+    i_num='123456789'    
     a=set()
-    for i in range(1,5):
-        for j in range(1,5):
-            if itertools.permutations(i_str,i)*itertools.permutations(i_str,j):
-                if sorted(i,j,1):pass
+    for k in range(1,3):
+        for i in itertools.permutations(i_num,k):
+            i_temp=int(''.join(i))                      
+            temp=''.join([s for s in i_num if s not in str(i_temp)])            
+            if k==1:m=4
+            else:m=3
+            for j in itertools.permutations(temp,m):
+                j_temp=int(''.join(j))                              
+                if euler_number.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
+    return sum(a)
     
                 
 def problem_34():
@@ -222,7 +226,17 @@ def problem_45():
     """
     
 def problem_46()->"backlog=1":
-    pass
+    n = 5
+    f = 1
+    primes = set()
+    while (1):
+        if all( n % p for p in primes ):
+            primes.add(n)           
+        else:
+            if not any( (n-2*i*i) in primes for i in range(1, n) ):break
+        n += 3-f
+        f = -f
+    return n
 
 def problem_47():
     i=642
@@ -246,7 +260,13 @@ def problem_48():
     for i in range(1,1001):
         i_result=int(str(i_result+int(str(i**i)[:-11:-1][::-1]))[:-11:-1][::-1])
     return i_result
-
+def problem_49():
+    n=1489
+    while True:
+        b,c=n+3300,6600
+        if euler_math.isPrime(n) and euler_math.isPrime(b) and euler_math.isPrime(c) and sorted(str(n))==sorted(str(b)) and sorted(str(b))==sorted(str(c)):break
+        n+=2
+    return n
 def prblem_50():
     i_result=0
     temp=0

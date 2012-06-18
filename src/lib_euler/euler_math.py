@@ -11,16 +11,14 @@ def isPrime(i_num):
     
     >>> isPrime(3197)
     False
-    >>> isPrime(39)
+    >>> isPrime(1)
     False
     """
-    #assert i_num>=0,"I must be a positive integer"
+    assert i_num>1,"I must be a positive integer"
     if i_num<2:return False
     elif i_num==2:return True
     elif not i_num&1:return False
-    for i in range(3,int(i_num**0.5)+1,2):
-        if i_num%i==0:
-            return False
+    elif any((i_num%i)==0 for i in range(3,int(i_num**0.5)+1,2)):return False   
     return True
 
 def factors_temp(i_num):
@@ -50,7 +48,7 @@ def factors(i_num):
 def divisors(i_num):
     """
     
-    >>> divisors(28)
+   
     
     """
     l_temp=factors(i_num)
@@ -169,4 +167,5 @@ def test():
     doctest.testmod()
 if __name__=="__main__":
     test()
+    #print(factors(4648767868))
         
