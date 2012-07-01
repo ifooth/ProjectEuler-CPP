@@ -3,7 +3,7 @@ Created on Jun 7, 2012
 
 @author: Administrator
 '''
-from lib_euler import *
+from euler.lib import *
 import decimal
 def problem_80():
     decimal.getcontext().prec=102    
@@ -32,11 +32,11 @@ def problem_92():
 def problem_95():
     i_result=[0,0]    
     for i in range(220,1000):
-        temp=euler_math.lib_sumOfDivisors(i)
+        temp=lib_math.sumOfDivisors(i)
         n=1
         if temp==1:continue
         while i!=temp:            
-            temp=euler_math.lib_sumOfDivisors(temp)
+            temp=lib_math.sumOfDivisors(temp)
             n+=1
             if temp==1 or temp>1000:break
         else:

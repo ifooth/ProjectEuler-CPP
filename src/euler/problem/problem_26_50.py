@@ -3,7 +3,7 @@ Created on Jun 7, 2012
 
 @author: Administrator
 '''
-from lib_euler import *
+from euler.lib import *
 import math
 import itertools
 
@@ -12,7 +12,7 @@ def problem_27():
     for i in range(-1000,1000):
         for j in range(-1000,1000):
             for n in itertools.count(0):
-                if not euler_math.lib_isPrime(n**2+i*n+j):break
+                if not lib_math.isPrime(n**2+i*n+j):break
             if n>i_max[0]:i_max=[n,i,j]
     return i_max[1]*i_max[2]                
 
@@ -43,7 +43,7 @@ def problem_32():
             else:m=3
             for j in itertools.permutations(temp,m):
                 j_temp=int(''.join(j))                              
-                if euler_number.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
+                if lib_number.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
     return sum(a)
     
                 
@@ -59,7 +59,7 @@ def problem_35():
         k,temp=0,i        
         while k<len(str(i)):
             temp=int(str(temp)[1::1]+str(temp)[0])
-            if not euler_math.isPrime(temp):break
+            if not lib_math.isPrime(temp):break
             k+=1
         else:num+=1            
     return num+13
@@ -67,16 +67,16 @@ def problem_35():
     n=0
     for i in range(100,1000000):
         for j in itertools.permutations(str(i),len(str(i))):
-            if len(j)!=len(str(i)) or not euler_math.isPrime(int(''.join(j))):break
+            if len(j)!=len(str(i)) or not lib_math.isPrime(int(''.join(j))):break
         else:
             n+=1
             print(locals())
     return n+13
-    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and euler_math.isPrime(int(''.join(j)))))+13  
+    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and lib_math.isPrime(int(''.join(j)))))+13  
     """
               
 def problem_36():    
-    return sum(i for i in range(1,1000000) if euler_math.isPalindromic(str(i)) and euler_math.isPalindromic(str(bin(i))[:1:-1]))
+    return sum(i for i in range(1,1000000) if lib_math.isPalindromic(str(i)) and lib_math.isPalindromic(str(bin(i))[:1:-1]))
  
 def problem_37():
     """
@@ -90,7 +90,7 @@ def problem_37():
         temp=str(i)            
         if '1' in temp[0]+temp[-1] or '9' in temp[0]+temp[-1] or '0' in temp or '4' in temp or '6' in temp or '8' in temp:continue
         for k in range(1,len(temp)):
-            if not(euler_math.isPrime(int(temp[:k+1])) and euler_math.isPrime(int(temp[k:]))):break
+            if not(lib_math.isPrime(int(temp[:k+1])) and lib_math.isPrime(int(temp[k:]))):break
         else:
             i_sum.add(temp)
             n+=1
@@ -153,7 +153,7 @@ def problem_40():
         
 def problem_41():
     s_num="123456789"
-    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if euler_math.isPrime(int(''.join(i))))
+    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if lib_math.isPrime(int(''.join(i))))
     """
     i=4
     i_result=0
@@ -161,12 +161,12 @@ def problem_41():
         for k in itertools.permutations(s_num[0:i],i):
             a=''
             temp=int(a.join(k))
-            if euler_math.isPrime(temp) and temp>i_result:i_result=temp
+            if lib_math.isPrime(temp) and temp>i_result:i_result=temp
         i+=1
     return i_result
     """           
 def problem_42():    
-    f_word=list(i.strip('"') for i in next(data.openfile('words.txt')).strip().split(','))
+    f_word=list(i.strip('"') for i in next(lib_data.openfile('words.txt')).strip().split(','))
     #print(locals())
     d_dict=dict(zip((i for i in f_word),((sum(ord(j) for j in i)-len(i)*64) for i in f_word)))    
     b_set=set(n*(n+1)//2 for n in range(1,int((int(max(d_dict.values())*2)**0.5))))
@@ -211,16 +211,16 @@ def problem_43():
         
 def problem_44():
     p2=0  #just a bug
-    pairs=((p1,p2)  for (n1,p1) in ((n,euler_buzz.pentagonal(n)) for n in itertools.count(0))
-           for p2 in (euler_buzz.pentagonal(n) for n in range(1,n1))
+    pairs=((p1,p2)  for (n1,p1) in ((n,lib_buzz.pentagonal(n)) for n in itertools.count(0))
+           for p2 in (lib_buzz.pentagonal(n) for n in range(1,n1))
            if euler_ceil.is_pentagonal(p1-p2) and euler_ceil.is_pentagonal(p1+p2))
     p1,p2=next(pairs)
     return p1-p2
 
 def problem_45():
-    return (a for a in (euler_buzz.hexagonal(n) for n in itertools.count(143+1)) if euler_ceil.is_pentagonal(a)).__next__()
+    return (a for a in (lib_buzz.hexagonal(n) for n in itertools.count(143+1)) if euler_ceil.is_pentagonal(a)).__next__()
     """
-    i_iter=(a for (n,a) in ((n,euler_buzz.triangle(n)) for n in itertools.count(285+1)) for (i,b) in ((i,euler_buzz.pentagonal(i)) for i in range(165,n)) for c in (euler_buzz.hexagonal(j) for j in range(143,i)) if a==b==c)
+    i_iter=(a for (n,a) in ((n,lib_buzz.triangle(n)) for n in itertools.count(285+1)) for (i,b) in ((i,lib_buzz.pentagonal(i)) for i in range(165,n)) for c in (lib_buzz.hexagonal(j) for j in range(143,i)) if a==b==c)
     #i_iter.__next__()
     return i_iter.__next__()
     """
@@ -241,16 +241,16 @@ def problem_46()->"backlog=1":
 def problem_47():
     i=642
     while True:             
-        if len(euler_math.factors(i))-1!=4:
+        if len(lib_math.factors(i))-1!=4:
             i+=1
             continue
-        elif len(euler_math.factors(i+1))-1!=4:
+        elif len(lib_math.factors(i+1))-1!=4:
             i+=2
             continue
-        elif len(euler_math.factors(i+2))-1!=4:
+        elif len(lib_math.factors(i+2))-1!=4:
             i+=3
             continue
-        elif len(euler_math.factors(i+3))-1!=4:
+        elif len(lib_math.factors(i+3))-1!=4:
             i+=4
             continue
         else:return i
@@ -264,14 +264,14 @@ def problem_49():
     n=1489
     while True:
         b,c=n+3300,6600
-        if euler_math.isPrime(n) and euler_math.isPrime(b) and euler_math.isPrime(c) and sorted(str(n))==sorted(str(b)) and sorted(str(b))==sorted(str(c)):break
+        if lib_math.isPrime(n) and lib_math.isPrime(b) and lib_math.isPrime(c) and sorted(str(n))==sorted(str(b)) and sorted(str(b))==sorted(str(c)):break
         n+=2
     return n
 def prblem_50():
     i_result=0
     temp=0
     for i in range(1,1000000):
-        if euler_math.lib_isPrime(i):
+        if lib_math.isPrime(i):
             temp+=i
             if temp>i_result:
                 i_result=temp
