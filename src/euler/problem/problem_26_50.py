@@ -6,7 +6,7 @@ Created on Jun 7, 2012
 from euler.lib import *
 import math
 import itertools
-
+import fractions
 def problem_27():
     i_max=[0,0,0]
     for i in range(-1000,1000):
@@ -46,7 +46,15 @@ def problem_32():
                 if lib_number.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
     return sum(a)
     
-                
+def problem_33():
+    result=1
+    for i in range(1,10):
+        for j in range(i+1,10):
+            for k in range(1,10):
+                if fractions.Fraction(i*10+j,j*10+k)==fractions.Fraction(i,k):
+                    result*=fractions.Fraction(i,k)
+    return result.denominator
+                                  
 def problem_34():
     i_fact=[1,1,2,6,24,120,720,5040,40320,362880]
     #return sum(filter(lambda x:x==sum(i_fact[int(i)] for i in str(x)),range(3,400000)))    

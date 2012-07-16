@@ -23,16 +23,17 @@ def problem_2():
     #print(l_list[:-1])   
     return sum(i for i in l_list[:-1] if i%2==0)
 
-def problem_3():   
-    return max(lib_math.factors(600851475143))
+def problem_3():       
+    return max(xint.xint(600851475143).factors())
 
 def problem_4():
-    return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if lib_math.isPalindromic(str(x*y)))
+    return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if xint.xint(x*y).isPalindromic())
 
 def problem_5():
     d_temp={1:1}
     for i in range(1,20):
-        for key,value in lib_math.factors(i).items():
+        for key,value in xint.xint(i).factors().items():
+        #for key,value in lib_math.factors(i).items():
             if key not in d_temp or value>d_temp[key]:d_temp.update({key:value})
     #print(d_temp)    
     return functools.reduce(operator.mul,(key**value for key,value in d_temp.items()))
@@ -43,7 +44,7 @@ def problem_6():
 def problem_7():    
     n,i=1,3
     while n!=10001:
-        if lib_math.isPrime(i):n+=1
+        if xint.xint(i).isPrime():n+=1
         i+=2
     else:return i-2
     """
@@ -74,7 +75,7 @@ def problem_9():
                 return i*j*(1000-i-j)
                   
 def problem_10():
-    return sum(i for i in range(3,2000000,2) if lib_math.isPrime(i))+2
+    return sum(i for i in range(3,2000000,2) if xint.xint(i).isPrime())+2
 
 def problem_11()->"Backlog==1":
     grid=[map(int,i.split()) for i in lib_data.problem11.strip().splitlines()]
