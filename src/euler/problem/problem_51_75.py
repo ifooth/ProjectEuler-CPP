@@ -9,7 +9,7 @@ import itertools
 def problem_51():
     l_list=[]
     for i in range(56993,100000):
-        if lib_math.isPrime(i):
+        if xint.xint(i).isPrime():
             l_list.append(i)
     i_num=[]    
     for l in l_list:
@@ -34,7 +34,7 @@ def problem_55():
         n=0
         while n<50:
             i=i+int((str(i)[::-1]))
-            if lib_math.isPalindromic(str(i)):
+            if xint.xint(i).isPalindromic():
                 break
             n+=1
         else:
@@ -109,8 +109,8 @@ def problem_70():
     t_result=100  
     for i in range(1,10000000):
         #i_result=min((t_result,(i/lib_math.phi(i) if sorted(str(i))==sorted(str(lib_math.phi(i)))))) 
-        if sorted(str(i))==sorted(str(lib_math.phi(i))):
-            t_result=min(t_result,i/lib_math.phi(i)) 
+        if sorted(str(i))==sorted(str(xint.xint(i).phi())):
+            t_result=min(t_result,i/xint.xint(i).phi()) 
     return t_result
 
 def problem_71():

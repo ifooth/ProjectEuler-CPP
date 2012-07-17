@@ -4,15 +4,15 @@ Created on Jun 7, 2012
 @author: Administrator
 '''
 from euler.lib import *
-import math
 import itertools
 import fractions
+import collections
 def problem_27():
     i_max=[0,0,0]
     for i in range(-1000,1000):
         for j in range(-1000,1000):
             for n in itertools.count(0):
-                if not lib_math.isPrime(n**2+i*n+j):break
+                if not xint.xint(n**2+i*n+j).isPrime():break
             if n>i_max[0]:i_max=[n,i,j]
     return i_max[1]*i_max[2]                
 
@@ -67,7 +67,7 @@ def problem_35():
         k,temp=0,i        
         while k<len(str(i)):
             temp=int(str(temp)[1::1]+str(temp)[0])
-            if not lib_math.isPrime(temp):break
+            if not xint.xint(temp).isPrime():break
             k+=1
         else:num+=1            
     return num+13
@@ -75,16 +75,16 @@ def problem_35():
     n=0
     for i in range(100,1000000):
         for j in itertools.permutations(str(i),len(str(i))):
-            if len(j)!=len(str(i)) or not lib_math.isPrime(int(''.join(j))):break
+            if len(j)!=len(str(i)) or not xint.xint(int(''.join(j))):break
         else:
             n+=1
             print(locals())
     return n+13
-    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and lib_math.isPrime(int(''.join(j)))))+13  
+    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and xint.xint(int(''.join(j)))))+13  
     """
               
 def problem_36():    
-    return sum(i for i in range(1,1000000) if lib_math.isPalindromic(str(i)) and lib_math.isPalindromic(str(bin(i))[:1:-1]))
+    return sum(i for i in range(1,1000000) if xint.xint(i).isPalindromic() and xint.xint(bin(i)).isPalindromic()[:1:-1])
  
 def problem_37():
     """
@@ -98,7 +98,7 @@ def problem_37():
         temp=str(i)            
         if '1' in temp[0]+temp[-1] or '9' in temp[0]+temp[-1] or '0' in temp or '4' in temp or '6' in temp or '8' in temp:continue
         for k in range(1,len(temp)):
-            if not(lib_math.isPrime(int(temp[:k+1])) and lib_math.isPrime(int(temp[k:]))):break
+            if not(xint.xint(int(temp[:k+1])) and xint.xint(int(temp[k:]))):break
         else:
             i_sum.add(temp)
             n+=1
@@ -161,7 +161,7 @@ def problem_40():
         
 def problem_41():
     s_num="123456789"
-    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if lib_math.isPrime(int(''.join(i))))
+    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if xint.xint(int(''.join(i))))
     """
     i=4
     i_result=0
@@ -169,7 +169,7 @@ def problem_41():
         for k in itertools.permutations(s_num[0:i],i):
             a=''
             temp=int(a.join(k))
-            if lib_math.isPrime(temp) and temp>i_result:i_result=temp
+            if xint.xint(temp) and temp>i_result:i_result=temp
         i+=1
     return i_result
     """           
@@ -249,16 +249,16 @@ def problem_46()->"backlog=1":
 def problem_47():
     i=642
     while True:             
-        if len(lib_math.factors(i))-1!=4:
+        if len(xint.xint(i).factors())-1!=4:
             i+=1
             continue
-        elif len(lib_math.factors(i+1))-1!=4:
+        elif len(xint.xint(i).factors())-1!=4:
             i+=2
             continue
-        elif len(lib_math.factors(i+2))-1!=4:
+        elif len(xint.xint(i).factors())-1!=4:
             i+=3
             continue
-        elif len(lib_math.factors(i+3))-1!=4:
+        elif len(xint.xint(i).factors())-1!=4:
             i+=4
             continue
         else:return i
@@ -268,20 +268,23 @@ def problem_48():
     for i in range(1,1001):
         i_result=int(str(i_result+int(str(i**i)[:-11:-1][::-1]))[:-11:-1][::-1])
     return i_result
+
 def problem_49():
-    n=1489
-    while True:
-        b,c=n+3300,6600
-        if lib_math.isPrime(n) and lib_math.isPrime(b) and lib_math.isPrime(c) and sorted(str(n))==sorted(str(b)) and sorted(str(b))==sorted(str(c)):break
-        n+=2
-    return n
-def prblem_50():
-    i_result=0
-    temp=0
-    for i in range(1,1000000):
-        if lib_math.isPrime(i):
-            temp+=i
-            if temp>i_result:
-                i_result=temp
-    return i_result
+    a=[i for i in xint.xint(10000).sievePrime() if i>1000]
+    for i in a:
+        if i+3330 in a and i+6660 in a and sorted(str(i))==sorted(str(i+3330))==sorted(str(i+6660)) and i!=1487:
+            return (str(i)+str(i+3330)+str(i+6660))
+     
+def problem_50():
+    i_list=xint.xint(1000000).sievePrime()
+    a=itertools.accumulate(i_list)
+    a=[i for i in a if i<1000000]
+    for k in a[-1:]:
+        j=0
+        while k>953:
+            if xint.xint(k).isPrime():
+                return k
+            k=k-i_list[j]
+            j+=1
+    
         

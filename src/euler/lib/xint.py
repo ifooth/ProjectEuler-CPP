@@ -10,12 +10,13 @@ class xint(int):
     classdocs
     '''       
     def isPrime(self):
-        assert self > 1, "I must be a positive integer"
+        assert self > 0, "I must be a positive integer"
         if self < 2:return False
         elif self == 2:return True
         elif not self & 1:return False
         elif any((self % i) == 0 for i in range(3, int(self ** 0.5) + 1, 2)):return False
         return True
+    
     def nextPrime(self):
         if self&1:
             a=self+2
@@ -23,6 +24,18 @@ class xint(int):
         while(not xint(a).isPrime()):
             a+=2
         return a
+    
+    def sievePrime(self):
+        """
+        Sieve of Eratosthenes
+        """        
+        x_list=list(range(2,self+1))
+        x_k=1    
+        while x_list[x_k-1]**2<self:           
+            x_list=x_list[:x_k]+list(filter(lambda i:i%x_list[x_k-1],x_list[x_k:]))
+            x_k+=1
+        return x_list
+        
         
     def isPalindromic(self):
         return str(self) == str(self)[::-1]
@@ -95,3 +108,4 @@ class xint(int):
                         l_result=l_te
                         j+=1
         return l_result
+    
