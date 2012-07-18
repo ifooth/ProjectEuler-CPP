@@ -12,7 +12,7 @@ def problem_27():
     for i in range(-1000,1000):
         for j in range(-1000,1000):
             for n in itertools.count(0):
-                if not xint.xint(n**2+i*n+j).isPrime():break
+                if not ext.XInt(n**2+i*n+j).isPrime():break
             if n>i_max[0]:i_max=[n,i,j]
     return i_max[1]*i_max[2]                
 
@@ -43,7 +43,7 @@ def problem_32():
             else:m=3
             for j in itertools.permutations(temp,m):
                 j_temp=int(''.join(j))                              
-                if lib_number.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
+                if utilities.is_pandigital(str(i_temp)+str(j_temp)+str(i_temp*j_temp)):a.add(i_temp*j_temp) 
     return sum(a)
     
 def problem_33():
@@ -67,7 +67,7 @@ def problem_35():
         k,temp=0,i        
         while k<len(str(i)):
             temp=int(str(temp)[1::1]+str(temp)[0])
-            if not xint.xint(temp).isPrime():break
+            if not ext.XInt(temp).isPrime():break
             k+=1
         else:num+=1            
     return num+13
@@ -75,16 +75,16 @@ def problem_35():
     n=0
     for i in range(100,1000000):
         for j in itertools.permutations(str(i),len(str(i))):
-            if len(j)!=len(str(i)) or not xint.xint(int(''.join(j))):break
+            if len(j)!=len(str(i)) or not ext.XInt(int(''.join(j))):break
         else:
             n+=1
             print(locals())
     return n+13
-    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and xint.xint(int(''.join(j)))))+13  
+    #return len(list(j for i in range(100,1000000) for j in itertools.permutations(str(i),len(str(i)))  if len(j)==len(str(i)) and ext.XInt(int(''.join(j)))))+13  
     """
               
 def problem_36():    
-    return sum(i for i in range(1,1000000) if xint.xint(i).isPalindromic() and xint.xint(bin(i)).isPalindromic()[:1:-1])
+    return sum(i for i in range(1,1000000) if ext.XInt(i).isPalindromic() and ext.XInt(bin(i)).isPalindromic()[:1:-1])
  
 def problem_37():
     """
@@ -98,7 +98,7 @@ def problem_37():
         temp=str(i)            
         if '1' in temp[0]+temp[-1] or '9' in temp[0]+temp[-1] or '0' in temp or '4' in temp or '6' in temp or '8' in temp:continue
         for k in range(1,len(temp)):
-            if not(xint.xint(int(temp[:k+1])) and xint.xint(int(temp[k:]))):break
+            if not(ext.XInt(int(temp[:k+1])) and ext.XInt(int(temp[k:]))):break
         else:
             i_sum.add(temp)
             n+=1
@@ -161,7 +161,7 @@ def problem_40():
         
 def problem_41():
     s_num="123456789"
-    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if xint.xint(int(''.join(i))))
+    return max(''.join(i) for j in range(2,10) for i in itertools.permutations(s_num[0:j],j) if ext.XInt(int(''.join(i))))
     """
     i=4
     i_result=0
@@ -169,12 +169,12 @@ def problem_41():
         for k in itertools.permutations(s_num[0:i],i):
             a=''
             temp=int(a.join(k))
-            if xint.xint(temp) and temp>i_result:i_result=temp
+            if ext.XInt(temp) and temp>i_result:i_result=temp
         i+=1
     return i_result
     """           
 def problem_42():    
-    f_word=list(i.strip('"') for i in next(lib_data.openfile('words.txt')).strip().split(','))
+    f_word=list(i.strip('"') for i in next(data.openfile('words.txt')).strip().split(','))
     #print(locals())
     d_dict=dict(zip((i for i in f_word),((sum(ord(j) for j in i)-len(i)*64) for i in f_word)))    
     b_set=set(n*(n+1)//2 for n in range(1,int((int(max(d_dict.values())*2)**0.5))))
@@ -219,16 +219,16 @@ def problem_43():
         
 def problem_44():
     p2=0  #just a bug
-    pairs=((p1,p2)  for (n1,p1) in ((n,lib_buzz.pentagonal(n)) for n in itertools.count(0))
-           for p2 in (lib_buzz.pentagonal(n) for n in range(1,n1))
+    pairs=((p1,p2)  for (n1,p1) in ((n,utilities.pentagonal(n)) for n in itertools.count(0))
+           for p2 in (utilities.pentagonal(n) for n in range(1,n1))
            if euler_ceil.is_pentagonal(p1-p2) and euler_ceil.is_pentagonal(p1+p2))
     p1,p2=next(pairs)
     return p1-p2
 
 def problem_45():
-    return (a for a in (lib_buzz.hexagonal(n) for n in itertools.count(143+1)) if euler_ceil.is_pentagonal(a)).__next__()
+    return (a for a in (utilities.hexagonal(n) for n in itertools.count(143+1)) if euler_ceil.is_pentagonal(a)).__next__()
     """
-    i_iter=(a for (n,a) in ((n,lib_buzz.triangle(n)) for n in itertools.count(285+1)) for (i,b) in ((i,lib_buzz.pentagonal(i)) for i in range(165,n)) for c in (lib_buzz.hexagonal(j) for j in range(143,i)) if a==b==c)
+    i_iter=(a for (n,a) in ((n,utilities.triangle(n)) for n in itertools.count(285+1)) for (i,b) in ((i,utilities.pentagonal(i)) for i in range(165,n)) for c in (utilities.hexagonal(j) for j in range(143,i)) if a==b==c)
     #i_iter.__next__()
     return i_iter.__next__()
     """
@@ -249,16 +249,16 @@ def problem_46()->"backlog=1":
 def problem_47():
     i=642
     while True:             
-        if len(xint.xint(i).factors())-1!=4:
+        if len(ext.XInt(i).factors())-1!=4:
             i+=1
             continue
-        elif len(xint.xint(i).factors())-1!=4:
+        elif len(ext.XInt(i).factors())-1!=4:
             i+=2
             continue
-        elif len(xint.xint(i).factors())-1!=4:
+        elif len(ext.XInt(i).factors())-1!=4:
             i+=3
             continue
-        elif len(xint.xint(i).factors())-1!=4:
+        elif len(ext.XInt(i).factors())-1!=4:
             i+=4
             continue
         else:return i
@@ -270,19 +270,19 @@ def problem_48():
     return i_result
 
 def problem_49():
-    a=[i for i in xint.xint(10000).sievePrime() if i>1000]
+    a=[i for i in ext.XInt(10000).sievePrime() if i>1000]
     for i in a:
         if i+3330 in a and i+6660 in a and sorted(str(i))==sorted(str(i+3330))==sorted(str(i+6660)) and i!=1487:
             return (str(i)+str(i+3330)+str(i+6660))
      
 def problem_50():
-    i_list=xint.xint(1000000).sievePrime()
+    i_list=ext.XInt(1000000).sievePrime()
     a=itertools.accumulate(i_list)
     a=[i for i in a if i<1000000]
     for k in a[-1:]:
         j=0
         while k>953:
-            if xint.xint(k).isPrime():
+            if ext.XInt(k).isPrime():
                 return k
             k=k-i_list[j]
             j+=1

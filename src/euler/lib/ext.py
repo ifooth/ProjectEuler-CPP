@@ -1,11 +1,18 @@
 '''
+Created on 2012-7-18
+
+@author: botwave
+'''
+'''
 Created on 2012-7-16
 
 @author: botwave
 '''
 import collections
+import fractions
+import re
 
-class xint(int):
+class XInt(int):
     '''
     classdocs
     '''       
@@ -21,7 +28,7 @@ class xint(int):
         if self&1:
             a=self+2
         else:a=self+1    
-        while(not xint(a).isPrime()):
+        while(not XInt(a).isPrime()):
             a+=2
         return a
     
@@ -109,3 +116,12 @@ class xint(int):
                         j+=1
         return l_result
     
+
+class XFraction(fractions.Fraction):
+    def __init__(self,str):
+        r=re.compile('d')
+        if r.match(str):
+            self.num=self.str
+        #super(xfraction.self).__init__(self) python 2x
+        else:super().__init__(str)
+                

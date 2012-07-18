@@ -5,7 +5,21 @@ Created on Jun 9, 2012
 '''
 from euler.lib import *
 def problem_108():    
+    return lib_data.openfile("names.txt").__next__()
+def problem_103():
     pass
+def problem_116():
+    color=[2,3,4]
+    limit=50
+    num=0
+    i=0
+    while i<3:
+        k=1
+        while k*color[i]<limit:
+            num+=((limit-color[i]*k)*k+1)
+            k+=1
+        i+=1
+    return num
 def problem_117():
     color=[2,3,4]    
     limit=5    

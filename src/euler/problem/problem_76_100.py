@@ -32,11 +32,11 @@ def problem_92():
 def problem_95():
     i_result=[0,0]    
     for i in range(220,1000):
-        temp=lib_math.sumOfDivisors(i)
+        temp=ext.XInt(i).sumOfDivisors()
         n=1
         if temp==1:continue
         while i!=temp:            
-            temp=lib_math.sumOfDivisors(temp)
+            temp=ext.XInt(temp).sumOfDivisors
             n+=1
             if temp==1 or temp>1000:break
         else:

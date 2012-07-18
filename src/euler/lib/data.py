@@ -5,7 +5,7 @@ Created on Jun 11, 2012
 '''
 import os
 
-datadir = os.path.dirname(__file__)
+datadir = os.path.dirname(__file__)[:-4]+"\data"
 
 def openfile(filename):
     """Return filename from data directory."""

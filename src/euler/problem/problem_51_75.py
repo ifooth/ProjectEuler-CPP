@@ -9,7 +9,7 @@ import itertools
 def problem_51():
     l_list=[]
     for i in range(56993,100000):
-        if xint.xint(i).isPrime():
+        if ext.EInt(i).isPrime():
             l_list.append(i)
     i_num=[]    
     for l in l_list:
@@ -34,7 +34,7 @@ def problem_55():
         n=0
         while n<50:
             i=i+int((str(i)[::-1]))
-            if xint.xint(i).isPalindromic():
+            if ext.EInt(i).isPalindromic():
                 break
             n+=1
         else:
@@ -58,7 +58,7 @@ def problem_57():
         l_result[0]=i*l_result[1]+l_result[0]
         l_result.reverse()
 def problem_59():
-    i_str=list(next(lib_data.openfile('cipher1.txt')).strip().split(','))    
+    i_str=list(next(data.openfile('cipher1.txt')).strip().split(','))    
     i_result=[]
     for i in itertools.combinations('abcdefghijklmnopqrstuvwxyz',3):
         for j in (itertools.islice(i_str,k,k+3) for k in range(0,len(i_str),3)):
@@ -109,8 +109,8 @@ def problem_70():
     t_result=100  
     for i in range(1,10000000):
         #i_result=min((t_result,(i/lib_math.phi(i) if sorted(str(i))==sorted(str(lib_math.phi(i)))))) 
-        if sorted(str(i))==sorted(str(xint.xint(i).phi())):
-            t_result=min(t_result,i/xint.xint(i).phi()) 
+        if sorted(str(i))==sorted(str(ext.EInt(i).phi())):
+            t_result=min(t_result,i/ext.EInt(i).phi()) 
     return t_result
 
 def problem_71():
