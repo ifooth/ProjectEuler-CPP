@@ -4,7 +4,7 @@ Created on Jun 12, 2012
 @author: Administrator
 '''
 import unittest
-import euler
+import _euler
 
 class Test(unittest.TestCase):
 
@@ -14,4 +14,4 @@ class Test(unittest.TestCase):
 
 
 if __name__ == "__main__":    
-    unittest.main(euler.main())
+    unittest.main(_euler.main())

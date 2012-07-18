@@ -24,16 +24,16 @@ def problem_2():
     return sum(i for i in l_list[:-1] if i%2==0)
 
 def problem_3():       
-    return max(xint.xint(600851475143).factors())
+    return max(ext.XInt(600851475143).factors())
 
 def problem_4():
-    return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if xint.xint(x*y).isPalindromic())
+    return max(x*y for x,y in itertools.product(range(100,1000),range(100,1000)) if ext.XInt(x*y).isPalindromic())
 
 def problem_5():
     d_temp={1:1}
     for i in range(1,20):
-        for key,value in xint.xint(i).factors().items():
-        #for key,value in lib_math.factors(i).items():
+        for key,value in ext.XInt(i).factors().items():
+        #for key,value in utilities.factors(i).items():
             if key not in d_temp or value>d_temp[key]:d_temp.update({key:value})
     #print(d_temp)    
     return functools.reduce(operator.mul,(key**value for key,value in d_temp.items()))
@@ -44,7 +44,7 @@ def problem_6():
 def problem_7():    
     n,i=1,3
     while n!=10001:
-        if xint.xint(i).isPrime():n+=1
+        if ext.XInt(i).isPrime():n+=1
         i+=2
     else:return i-2
     """
@@ -59,7 +59,7 @@ def problem_7():
     """
 
 def problem_8():
-    i_str=''.join(lib_data.problem8.strip().splitlines())
+    i_str=''.join(data.problem8.strip().splitlines())
     """   
     i_temp=[]
     for i in range(len(i_str)-4):        
@@ -75,14 +75,14 @@ def problem_9():
                 return i*j*(1000-i-j)
                   
 def problem_10():
-    return sum(i for i in range(3,2000000,2) if xint.xint(i).isPrime())+2
+    return sum(i for i in range(3,2000000,2) if ext.XInt(i).isPrime())+2
 
 def problem_11()->"Backlog==1":
-    grid=[map(int,i.split()) for i in lib_data.problem11.strip().splitlines()]
+    grid=[map(int,i.split()) for i in data.problem11.strip().splitlines()]
     diffs=[(0, +1), (+1, 0), (+1, +1), (+1, -1)]
     sr,sc = len(grid),len(grid[0])
     return
-    i_str=[i.split() for i in lib_data.problem11.strip().splitlines()]
+    i_str=[i.split() for i in data.problem11.strip().splitlines()]
     for i in range(20):
         for j in range(17):
             # maximum product from horizontal and vertical lines
@@ -93,10 +93,10 @@ def problem_11()->"Backlog==1":
     return max(phv,pd)
 
 def problem_12():
-    return (i for i in itertools.accumulate(itertools.count(1)) if lib_math.numberOfDivisors(i)>500).__next__()
+    return (i for i in itertools.accumulate(itertools.count(1)) if utilities.numberOfDivisors(i)>500).__next__()
 
 def problem_13():        
-    return str(sum(int(i) for i in lib_data.problem13.strip().splitlines()))[:10]
+    return str(sum(int(i) for i in data.problem13.strip().splitlines()))[:10]
 
 def problem_14():
     n=[0,0]
@@ -141,7 +141,7 @@ def problem_17():
     return len(i_sum)
 
 def problem_18()->"Backlog==2":
-    i_str=[map(int,i.split()) for i in lib_data.problem18.strip().splitlines()]            
+    i_str=[map(int,i.split()) for i in data.problem18.strip().splitlines()]            
     itertools.product([0,+1],repeat=len(i_str)-1)
 
 def problem_19():
@@ -151,15 +151,15 @@ def problem_20():
     return sum(int(i) for i in str(math.factorial(100)))
 
 def problem_21():
-    return sum(i for i in range(2,10000) if i!=lib_math.sumOfDivisors(i) and i==lib_math.sumOfDivisors(lib_math.sumOfDivisors(i)))
+    return sum(i for i in range(2,10000) if i!=utilities.sumOfDivisors(i) and i==utilities.sumOfDivisors(utilities.sumOfDivisors(i)))
 
 def problem_22():
-    i_str=sorted([i.strip('"') for i in next(lib_data.openfile('names.txt')).strip().split(',')])
+    i_str=sorted([i.strip('"') for i in next(data.openfile('names.txt')).strip().split(',')])
     #print(type(next(data.openfile('names.txt'))))              
     return sum((i+1)*sum(ord(j)-64 for j in i_str[i]) for i in range(len(i_str)))
 
 def problem_23():    
-    l_abundant=set(i for i in range(1,28123) if lib_math.sumOfDivisors(i)>i)
+    l_abundant=set(i for i in range(1,28123) if utilities.sumOfDivisors(i)>i)
     return sum(i for i in range(28123) if not any((i-a in l_abundant) for a in l_abundant))
     """
     l_result=set(range(1,28123))

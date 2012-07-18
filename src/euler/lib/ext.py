@@ -3,11 +3,7 @@ Created on 2012-7-18
 
 @author: botwave
 '''
-'''
-Created on 2012-7-16
 
-@author: botwave
-'''
 import collections
 import fractions
 import re

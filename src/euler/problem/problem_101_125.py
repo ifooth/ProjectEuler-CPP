@@ -4,10 +4,14 @@ Created on Jun 9, 2012
 @author: Administrator
 '''
 from euler.lib import *
+
 def problem_108():    
-    return lib_data.openfile("names.txt").__next__()
+    return data.openfile("names.txt").__next__()
 def problem_103():
     pass
+def problem_113():
+    n=100
+    return util.binomial(n+10,10)+util.binomial(n+9,9)-10*n-2
 def problem_116():
     color=[2,3,4]
     limit=50

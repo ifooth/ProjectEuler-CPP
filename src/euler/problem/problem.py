@@ -6,10 +6,9 @@ Created on 2012-7-18
 from euler.problem import problem_1_25
 from euler.problem import problem_26_50
 from euler.problem import problem_51_75
-from euler.problem import problem_1_25
-from euler.problem import problem_26_50
-from euler.problem import problem_51_75
-class problem():
+from euler.problem import problem_76_100
+from euler.problem import problem_101_125
+class Problem():
     
     def __init__(self,problem_num):
         self.problem_num=problem_num
@@ -28,5 +27,5 @@ class problem():
         elif self.problem_num<100:                       
             return exec("print(problem_76_100."+str_pro+")")
         elif self.problem_num<125:                       
-            return exec("print(problem_100_125."+str_pro+")")
+            return exec("print(problem_101_125."+str_pro+")")
             

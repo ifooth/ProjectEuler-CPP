@@ -6,14 +6,14 @@ Created on Jun 12, 2012
 import cProfile
 import pstats
 import timeit
-import euler
+import _euler
 
 
 def euler_timeit():
-    print(timeit.Timer(lambda:euler.main()).timeit(1))    
+    print(timeit.Timer(lambda:_euler.main()).timeit(1))    
     
 def euler_profile():
-    cProfile.run('euler.main()')
+    cProfile.run('_euler.main()')
 if __name__=="__main__":    
-    #euler_timeit()
-    euler_profile()
+    euler_timeit()
+    #euler_profile()
