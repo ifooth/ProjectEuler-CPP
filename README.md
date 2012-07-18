@@ -1,4 +1,4 @@
-#encoding=utf-8
+ï»¿#encoding=utf-8
 
 Project-Euler
 =============
@@ -16,49 +16,49 @@ Some people have expressed their concerns about making the solutions of the Eule
 Project Euler Python
 =======================
 
-= ¼ò½é
+= ç®€ä»‹
 
-ÓÃPython 3.x¼ÆËãProject Euler ¿ª·¢»·¾³ÊÇWin7/Eclipse Juno/Pydev
-
-
-= ÎÄ¼þ¼ò½é
-
-euler.py ÔËÐÐÖ÷Èë¿Ú
-euler_pdb.py ¶¯Ì¬µ÷ÊÔÄ£¿é
-euler_profiling.py profiling²âÊÔÄ£¿é
-euler_unitest.py unitest²âÊÔÄ£¿é
-
-euler.lib Ëã·¨¿â
-euler.lib.ext ±ê×¼Êý¾ÝÀàÐÍÀ©Õ¹¿â
-euler.lib.data Êý¾ÝÎÄ¼þ´¦ÀíÄ£¿é
-euler.lib.utilities Ð¡ÊµÓÃ¿â
-
-euler.problem ÎÊÌâ´úÂë¿â
-euler.problem.problem ÎÊÌâÈë¿ÚÀà
-euler.problem.problem_x_x ÎÊÌâ´úÂë¿â
-
-euler.data ÎÊÌâÐèÒªµÄÊý¾ÝÎÄ¼þ
+ç”¨Python 3.xè®¡ç®—Project Euler å¼€å‘çŽ¯å¢ƒæ˜¯Win7/Eclipse Juno/Pydev
 
 
-= ¿ª·¢±àÂë¹æ·¶
+= æ–‡ä»¶ç®€ä»‹
 
-´úÂëµÄ²¼¾Ö
-1.Eclipse Juno+PyDev Ä¬ÈÏ±àÂë
+euler.py è¿è¡Œä¸»å…¥å£
+euler_pdb.py åŠ¨æ€è°ƒè¯•æ¨¡å—
+euler_profiling.py profilingæµ‹è¯•æ¨¡å—
+euler_unitest.py unitestæµ‹è¯•æ¨¡å—
 
-ÃüÃûÔ¼¶¨
+euler.lib ç®—æ³•åº“
+euler.lib.ext æ ‡å‡†æ•°æ®ç±»åž‹æ‰©å±•åº“
+euler.lib.data æ•°æ®æ–‡ä»¶å¤„ç†æ¨¡å—
+euler.lib.utilities å°å®žç”¨åº“
 
-1.°üÃûÓëµÄ×ÜÊÇÈ«²¿Ð¡Ð´µÄASCII×ÖÄ¸ lowcaselowcase
-2.Ä£¿éÃûÈ«²¿ÊÇÐ¡Ð´µÄASCII×ÖÄ¸,ÔËÐÐÏÂ»®Ïß
-2.ÀàÃûÊÇ¸öÒ»Ãû´Ê£¬²ÉÓÃ´óÐ¡Ð´»ìºÏµÄ·½Ê½£¬Ã¿¸öµ¥´ÊµÄÊ××ÖÄ¸´óÐ´
-3.º¯ÊýÃû·½·¨ÃûÊÇÒ»¸ö¶¯´Ê£¬²ÉÓÃ´óÐ¡Ð´»ìºÏµÄ·½Ê½£¬µÚÒ»¸öµ¥´ÊµÄÊ××ÖÄ¸Ð¡Ð´£¬Æäºóµ¥´ÊµÄÊ××ÖÄ¸´óÐ´
-4.±äÁ¿Ãû ³ýÁË±äÁ¿ÃûÍâ£¬ËùÓÐÊµÀý£¬°üÀ¨Àà£¬Àà³£Á¿£¬¾ù²ÉÓÃ´óÐ¡Ð´»ìºÏµÄ·½Ê½£¬µÚÒ»¸öµ¥´ÊµÄÊ××ÖÄ¸Ð¡Ð´£¬Æäºóµ¥´ÊµÄÊ××ÖÄ¸´óÐ´
-5.³£Á¿Ãû ³£Á¿µÄÉùÃ÷£¬Ó¦¸ÃÈ«²¿´óÐ´£¬µ¥´Ê¼äÓÃÏÂ»®Ïß¸ô¿ª
-6.·½·¨Óë±äÁ¿Ãû ²Î¼ûº¯ÊýÃûÓëÈ«¾Ö±äÁ¿Ãû
+euler.problem é—®é¢˜ä»£ç åº“
+euler.problem.problem é—®é¢˜å…¥å£ç±»
+euler.problem.problem_x_x é—®é¢˜ä»£ç åº“
+
+euler.data é—®é¢˜éœ€è¦çš„æ•°æ®æ–‡ä»¶
 
 
-¼Ì³ÐµÄÉè¼Æ
-1._±íÊ¾ÄÚ²¿±äÁ¿Óëº¯Êý ¿ÉÒÔÈÏÎªprotected
-2.__±íÊ¾Ë½ÓÐ±äÁ¿Óëº¯Êý ¿ÉÒÔÈÏÎªprivate
+= å¼€å‘ç¼–ç è§„èŒƒ
+
+ä»£ç çš„å¸ƒå±€
+1.Eclipse Juno+PyDev é»˜è®¤ç¼–ç 
+
+å‘½åçº¦å®š
+
+1.åŒ…åä¸Žçš„æ€»æ˜¯å…¨éƒ¨å°å†™çš„ASCIIå­—æ¯ lowcaselowcase
+2.æ¨¡å—åå…¨éƒ¨æ˜¯å°å†™çš„ASCIIå­—æ¯,è¿è¡Œä¸‹åˆ’çº¿
+2.ç±»åæ˜¯ä¸ªä¸€åè¯ï¼Œé‡‡ç”¨å¤§å°å†™æ··åˆçš„æ–¹å¼ï¼Œæ¯ä¸ªå•è¯çš„é¦–å­—æ¯å¤§å†™
+3.å‡½æ•°åæ–¹æ³•åæ˜¯ä¸€ä¸ªåŠ¨è¯ï¼Œé‡‡ç”¨å¤§å°å†™æ··åˆçš„æ–¹å¼ï¼Œç¬¬ä¸€ä¸ªå•è¯çš„é¦–å­—æ¯å°å†™ï¼Œå…¶åŽå•è¯çš„é¦–å­—æ¯å¤§å†™
+4.å˜é‡å é™¤äº†å˜é‡åå¤–ï¼Œæ‰€æœ‰å®žä¾‹ï¼ŒåŒ…æ‹¬ç±»ï¼Œç±»å¸¸é‡ï¼Œå‡é‡‡ç”¨å¤§å°å†™æ··åˆçš„æ–¹å¼ï¼Œç¬¬ä¸€ä¸ªå•è¯çš„é¦–å­—æ¯å°å†™ï¼Œå…¶åŽå•è¯çš„é¦–å­—æ¯å¤§å†™
+5.å¸¸é‡å å¸¸é‡çš„å£°æ˜Žï¼Œåº”è¯¥å…¨éƒ¨å¤§å†™ï¼Œå•è¯é—´ç”¨ä¸‹åˆ’çº¿éš”å¼€
+6.æ–¹æ³•ä¸Žå˜é‡å å‚è§å‡½æ•°åä¸Žå…¨å±€å˜é‡å
+
+
+ç»§æ‰¿çš„è®¾è®¡
+1._è¡¨ç¤ºå†…éƒ¨å˜é‡ä¸Žå‡½æ•° å¯ä»¥è®¤ä¸ºprotected
+2.__è¡¨ç¤ºç§æœ‰å˜é‡ä¸Žå‡½æ•° å¯ä»¥è®¤ä¸ºprivate
 
 
 
