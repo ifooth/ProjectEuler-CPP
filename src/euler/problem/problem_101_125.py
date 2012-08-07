@@ -4,7 +4,10 @@ Created on Jun 9, 2012
 @author: Administrator
 '''
 from euler.lib import *
-
+def problem_111():
+    a=[i for i in ext.XInt(10000).sievePrime() if i>1000]
+    import collections    
+    return a
 def problem_108():    
     return data.openfile("names.txt").__next__()
 def problem_103():

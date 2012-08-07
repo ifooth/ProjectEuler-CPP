@@ -1,7 +1,8 @@
+#encoding=utf-8
 '''
 Created on 2012-7-18
 
-@author: botwave
+@author: john lei
 '''
 
 import collections
@@ -13,19 +14,29 @@ class XInt(int):
     classdocs
     '''       
     def isPrime(self):
-        assert self > 0, "I must be a positive integer"
-        if self < 2:return False
-        elif self == 2:return True
-        elif not self & 1:return False
-        elif any((self % i) == 0 for i in range(3, int(self ** 0.5) + 1, 2)):return False
+        """改进的素数检测法
+        """
+        assert self>-1,"Number must be a positive integer"
+        if self<2:return False
+        elif self%2==0 and self!=2:return False
+        elif self%3==0 and self!=3:return False
+        elif any((self%i)==0 or (self%(i+2))==0 for i in range(5,int(self**0.5)+2,6)):return False
+        return True
+    
+    def __isPrime_b(self):
+        """以前的素数检测法
+        """
+        assert self>-1,"Number must be a positive integer"
+        if self<2:return False
+        elif self==2:return True
+        elif self%2==0:return False
+        elif any((self%i)==0 for i in range(3,int(self**0.5)+1,2)):return False
         return True
     
     def nextPrime(self):
-        if self&1:
-            a=self+2
+        if self&1:a=self+2
         else:a=self+1    
-        while(not XInt(a).isPrime()):
-            a+=2
+        while(not XInt(a).isPrime()):a+=2
         return a
     
     def sievePrime(self):
@@ -41,17 +52,17 @@ class XInt(int):
         
         
     def isPalindromic(self):
-        return str(self) == str(self)[::-1]
+        return str(self)==str(self)[::-1]
     def factors_temp(self):
         yield 1
-        i, limit = 2, self ** 0.5
-        while i <= limit:
-            if self % i == 0:
+        i,limit=2,self**0.5
+        while i<=limit:
+            if self%i==0:
                 yield i
-                self //= i
-                limit = self ** 0.5
-            else:i += 1
-        if self > 1:yield self
+                self//=i
+                limit=self**0.5
+            else:i+=1
+        if self>1:yield self
         
     def factors(self): 
         cnt=collections.Counter()
@@ -113,11 +124,65 @@ class XInt(int):
         return l_result
     
 
-class XFraction(fractions.Fraction):
-    def __init__(self,str):
-        r=re.compile('d')
-        if r.match(str):
-            self.num=self.str
+class XFraction(fractions.Fraction):    
+    def __new__(cls,s):
+        self=super(XFraction,cls).__new__(cls)
+        r=re.compile('^-?[0-9]*(\.[0-9]*(\([1-9]+[0-9]*\))?)?$')        
+        mat=r.match(s)        
+        try:
+            self.xf=mat.group()
+        except:
+            raise IndexError
+        else:
+            return self           
         #super(xfraction.self).__init__(self) python 2x
-        else:super().__init__(str)
-                
+        #else:fractions.Fraction.__new__(self)
+    
+    def toFraction(self):
+        a=re.search('-?[0-9]*',self.xf)
+        if a:
+            a=a.group()
+        else:
+            a=0
+        b=re.search('\.[0-9]*',self.xf)
+        if b:
+            b=b.group()[1:]            
+        else:
+            b=''
+            
+        repeat=re.search('\([1-9]+[0-9]*\)',self.xf)
+        if repeat:
+            repeat=repeat.group()[1:-1]
+        else:
+            repeat=''
+        if repeat is '':
+            self.XF=fractions.Fraction(self.xf)            
+        else:
+            if b is '':
+                self.XF=fractions.Fraction(a)+fractions.Fraction(repeat+'/'+'9'*len(repeat))
+            else:
+                self.XF=fractions.Fraction(a)+fractions.Fraction(str(int(b+repeat)-int(b))+'/'+'9'*len(repeat)+'0'*len(b))
+        return self.XF
+    
+    def toRepeatingDecimal(self):
+        """长除法
+        """
+        a=self.numerator()
+        b=self.denominator()
+        l=[divmod(a,b)]
+        k=10*len(b)*l[0][1]
+        i=0
+        temp=divmod(k,b)
+        while temp not in l or l[-1][0]==0:
+            l.append(temp)
+            i+=1
+            k=10*len(b)*l[i][1]
+            temp=divmod(k,b)
+        return l                   
+        
+        
+        
+if __name__=="__main__":
+    fractions.Fraction()
+    xf=XFraction()
+    xf.toFraction()     

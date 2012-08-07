@@ -17,3 +17,6 @@ def euler_profile():
 if __name__=="__main__":    
     euler_timeit()
     #euler_profile()
+    import time
+    for i in range(10,1000):
+        

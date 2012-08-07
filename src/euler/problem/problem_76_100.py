@@ -5,6 +5,10 @@ Created on Jun 7, 2012
 '''
 from euler.lib import *
 import decimal
+def problem_79():
+    mydata=[i.strip() for i in data.openfile('keylog.txt')]
+    key=mydata[0]          
+    print(mydata)
 def problem_80():
     decimal.getcontext().prec=102    
     i_sum=0
@@ -42,3 +46,4 @@ def problem_95():
         else:
             if i_result[0]<n:i_result=[n,i]
     return i_result
+problem_79()
