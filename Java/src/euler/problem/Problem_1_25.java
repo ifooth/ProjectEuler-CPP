@@ -41,16 +41,5 @@ public class Problem_1_25 {
 		}
 		return i;
 	}
-
-	public static int problem_4() {
-		for(int i=100;i<1000;i++){
-			for (int j=100;j<1000;j++){
-				EInteger a=new EInteger(i*j);
-				if (a.isPalindromic()){
-					
-				}
-			}
-		}
-	}
-
+	
 }
