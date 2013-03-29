@@ -1,22 +1,22 @@
 '''
 Created on Jun 7, 2012
 
-@author: Administrator
+@author: Joe Lei
 '''
+
+import logging
+log=logging.getLogger(__name__)
+
 from euler.lib import *
 import math
 import itertools
 def problem_51():
-    l_list=[]
-    for i in range(56993,100000):
-        if ext.EInt(i).isPrime():
-            l_list.append(i)
-    i_num=[]    
-    for l in l_list:
-        if str(l).count('0')>=3 or str(l).count('1')>=3 or str(l).count('2')>=3 or str(l).count('3')>=3 or str(l).count('4')>=3 or str(l).count('5')>=3 or str(l).count('6')>=3 or str(l).count('7')>=3 or str(l).count('8')>=3 or str(l).count('9')>=3:
-            i_num.append(l)
-    if len(i_num)>=8:
-        print(i_num)
+    k=3
+    result=[]
+    for i in range(1,10):
+        if ext.XInt(i*10+k).isPrime():result.append(i*10+k)
+    log.info(result)
+    return result
     
 def problem_52():
     return (i for i in itertools.count(6) if sorted(str(i))==sorted(str(i*2))==sorted(str(i*3))==sorted(str(i*4))==sorted(str(i*5))==sorted(str(i*6))).__next__()

@@ -1,7 +1,7 @@
 '''
 Created on 2012-7-18
 
-@author: botwave
+@author: Joe Lei
 '''
 from euler.problem import problem_1_25
 from euler.problem import problem_26_50
