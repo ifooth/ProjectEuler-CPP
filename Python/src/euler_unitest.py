@@ -4,7 +4,7 @@ Created on Jun 12, 2012
 @author: Administrator
 '''
 import unittest
-import _euler
+import euler
 
 class Test(unittest.TestCase):
 

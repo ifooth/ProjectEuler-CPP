@@ -9,7 +9,7 @@ import collections
 import fractions
 import re
 
-class XInt(int):
+class intx(int):
     '''
     classdocs
     '''       
@@ -36,19 +36,19 @@ class XInt(int):
     def nextPrime(self):
         if self&1:a=self+2
         else:a=self+1    
-        while(not XInt(a).isPrime()):a+=2
+        while(not intx(a).isPrime()):a+=2
         return a
     
     def sievePrime(self):
         """
         Sieve of Eratosthenes
         """        
-        x_list=list(range(2,self+1))
-        x_k=1    
-        while x_list[x_k-1]**2<self:           
-            x_list=x_list[:x_k]+list(filter(lambda i:i%x_list[x_k-1],x_list[x_k:]))
-            x_k+=1
-        return x_list
+        prime_list=list(range(2,self+1))
+        i=1    
+        while prime_list[i-1]**2<self:           
+            prime_list=prime_list[:i]+list(filter(lambda k:k%prime_list[i-1],prime_list[i:]))
+            i+=1
+        return prime_list
         
         
     def isPalindromic(self):
@@ -124,7 +124,7 @@ class XInt(int):
         return l_result
     
 
-class XFraction(fractions.Fraction):    
+class fractionx(fractions.Fraction):    
     def __new__(cls,s):
         self=super(XFraction,cls).__new__(cls)
         r=re.compile('^-?[0-9]*(\.[0-9]*(\([1-9]+[0-9]*\))?)?$')        

@@ -6,11 +6,13 @@ Created on Jun 12, 2012
 import cProfile
 import pstats
 import timeit
-import _euler
+import euler
 
+import logging
+log=logging.getLogger('euler_profiling')
 
 def euler_timeit():
-    print(timeit.Timer(lambda:_euler.main()).timeit(1))    
+    log.info(timeit.Timer(lambda:_euler.main()).timeit(1))    
     
 def euler_profile():
     cProfile.run('_euler.main()')

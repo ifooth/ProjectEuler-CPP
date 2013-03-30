@@ -7,15 +7,30 @@ Created on Jun 7, 2012
 import logging
 log=logging.getLogger(__name__)
 
-from lib import *
+from lib.ext import intx,fractionx
 import math
 import itertools
+import string
+
+def eight_prime_family(prime,rd):
+    c=0
+    for digit in '0123456789':
+        n=int(prime.replace(rd,digit))
+        if (n>100000 and intx(n).isPrime()):
+            c=c+1
+    return c==8
 def problem_51():
+    for prime in intx(1000000).sievePrime():
+        if prime>100000:
+            s=str(prime)
+            last_digit=s[5:6]
+            if (s.count('0')==3 and eight_prime_family(s,'0') or \
+                s.count('1')==3 and last_digit!='1' and eight_prime_family(s,'1') or \
+                s.count('2')==3 and eight_prime_family(s,'2')):return s            
     k=3
     result=[]
     for i in range(1,10):
-        if ext.XInt(i*10+k).isPrime():result.append(i*10+k)
-    log.debug(result)        
+        if intx(i*10+k).isPrime():result.append(i*10+k)          
     return result
     
 def problem_52():
