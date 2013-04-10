@@ -8,9 +8,11 @@ import logging
 log=logging.getLogger(__name__)
 
 from lib.ext import intx,fractionx
+from lib import data
 import math
 import itertools
 import string
+from collections import Counter
 
 def eight_prime_family(prime,rd):
     c=0
@@ -26,12 +28,7 @@ def problem_51():
             last_digit=s[5:6]
             if (s.count('0')==3 and eight_prime_family(s,'0') or \
                 s.count('1')==3 and last_digit!='1' and eight_prime_family(s,'1') or \
-                s.count('2')==3 and eight_prime_family(s,'2')):return s            
-    k=3
-    result=[]
-    for i in range(1,10):
-        if intx(i*10+k).isPrime():result.append(i*10+k)          
-    return result
+                s.count('2')==3 and eight_prime_family(s,'2')):return s   
     
 def problem_52():
     return (i for i in itertools.count(6) if sorted(str(i))==sorted(str(i*2))==sorted(str(i*3))==sorted(str(i*4))==sorted(str(i*5))==sorted(str(i*6))).__next__()
@@ -39,8 +36,123 @@ def problem_52():
 def problem_53():
     return len(list((i,j) for i in range(1,101) for j in range(1,i+1) if math.factorial(i)/(math.factorial(j)*math.factorial(i-j))>1000000))
 
+class poker():
+    def __init__(self,card):
+        self.cards=card.split(' ') 
+        self.card1,self.card2=self.cards[:5],self.cards[5:]
+        self.val={'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'T':10,'J':11,'Q':12,'K':13,'A':14}
+
+    def win(self):
+        return self.hand(self.card1)>self.hand(self.card2)
+
+    def hand(self,card):
+        if self.RoyalFlush(card):
+            log.info('%s is Royal Flush'%card)
+            return 108
+        elif self.StraightFlush(card):
+            log.info('%s is Straight Flush'%card)
+            return 107
+        elif self.FourKind(card):
+            log.info('%s is Four Kind'%card)
+            return 106
+        elif self.FullHouse(card):
+            log.info('%s is Full House'%card)
+            return 105
+        elif self.Flush(card):
+            log.info('%s is Flush'%card)
+            return 104
+        elif self.Straight(card):
+            log.info('%s is Straight'%card)           
+            return 103
+        elif self.ThreeKind(card):
+            log.info('%s is Three Kind'%card)  
+            return 102
+        elif self.TwoPairs(card):
+            log.info('%s is Two Pairs'%card)  
+            return 101
+        elif self.OnePair(card):
+            log.info('%s is One Pair'%card)  
+            return 100
+        else:
+            #log.info('%s is HighCard : %s'%(card,self.HighCard(card)))  
+            return self.HighCard(card) 
+
+
+    def RoyalFlush(self,card): #card repr [8C,TS,KC,9H,4S]        
+        c=Counter([i[1] for i in card])
+        s=max([c[i] for i in 'DCHS']) 
+        return ''.join([i[0] for i in card]) in 'TJQKQ' and s==5
+
+    def StraightFlush(self,card):
+        c=Counter([i[1] for i in card])
+        s=max([c[i] for i in 'DCHS']) 
+        return ''.join([i[0] for i in card]) in '23456789TJQKA' and s==5
+
+    def FourKind(self,card):
+        p=[i[0] for i in card]
+        c=Counter(p)
+        s=max([c[i] for i in p])
+        return s==4
+
+    def FullHouse(self,card): #3+3+3+2+2
+        p=[i[0] for i in card]
+        c=Counter(p)
+        s=sum([c[i] for i in p]) 
+        return s==13
+
+    def Flush(self,card):
+        c=Counter([i[1] for i in card])
+        s=max([c[i] for i in 'DCHS'])
+        return s==5
+
+    def Straight(self,card):        
+        return ''.join([i[0] for i in card]) in '23456789TJQKA'
+
+    def ThreeKind(self,card): #3+3+3+1+1
+        p=[i[0] for i in card]
+        c=Counter(p)
+        s=sum([c[i] for i in p])
+        return s==11
+
+    def TwoPairs(self,card): #2+2+2+2+1
+        p=[i[0] for i in card]
+        c=Counter(p)
+        s=sum([c[i] for i in p])
+        return s==9
+
+    def OnePair(self,card): #2+2+1+1+1
+        s=10**5
+        p=[i[0] for i in card]
+        c=Counter(p)
+        s=sum([c[i] for i in p])
+        temp=c
+        for i in temp:
+            if c[i]==2:c.pop(i)
+        
+        for i in range(3):
+            for j in sorted([self.val[i[0]] for i in c]):
+                s+=j*10**i
+
+        return s
+
+    def HighCard(self,card):        
+        s=0
+        for i in range(5):
+            for j in sorted([self.val[i[0]] for i in card]):
+                s+=j*10**i
+        return s
+
+
 def problem_54(): #Diamond Club Heart Spade
-    pass
+    d=data.openfile('poker.txt').read().split('\n')[:-1]    
+    s=0
+    log.info(len(d))     
+    for i in d[:-1]:
+        if poker(i).win():s=s+1
+    return s
+   
+
+
                
     
 def problem_55():
