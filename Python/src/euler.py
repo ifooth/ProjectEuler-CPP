@@ -13,7 +13,7 @@ log=logging.getLogger('euler')
 from problems import Problem
     
 if __name__=="__main__":    
-    result=Problem(54).run()
+    result=Problem(57).run()
     log.info(result)     
     
     

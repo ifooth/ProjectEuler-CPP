@@ -1,3 +1,4 @@
+#encoding=utf-8
 '''
 Created on Jun 7, 2012
 
@@ -37,9 +38,12 @@ def problem_53():
     return len(list((i,j) for i in range(1,101) for j in range(1,i+1) if math.factorial(i)/(math.factorial(j)*math.factorial(i-j))>1000000))
 
 class poker():
+    '''2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace.
+        heart 红桃 spade 黑桃 club 梅花 diamond 方块
+    '''
     def __init__(self,card):
         self.cards=card.split(' ') 
-        self.card1,self.card2=self.cards[:5],self.cards[5:]
+        self.card1,self.card2=self.cards[:5],self.cards[5:]        
         self.val={'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'T':10,'J':11,'Q':12,'K':13,'A':14}
 
     def win(self):
@@ -78,77 +82,59 @@ class poker():
             return self.HighCard(card) 
 
 
-    def RoyalFlush(self,card): #card repr [8C,TS,KC,9H,4S]        
+    def RoyalFlush(self,card): #card repr [TC,JC,QC,KC,AC]        
         c=Counter([i[1] for i in card])
-        s=max([c[i] for i in 'DCHS']) 
-        return ''.join([i[0] for i in card]) in 'TJQKQ' and s==5
+        return sorted(''.join([i[0] for i in card])) == 'TJQKA' and len(c)==1
 
     def StraightFlush(self,card):
-        c=Counter([i[1] for i in card])
-        s=max([c[i] for i in 'DCHS']) 
-        return ''.join([i[0] for i in card]) in '23456789TJQKA' and s==5
+        c=Counter([i[1] for i in card])        
+        return ''.join([i[0] for i in card]) in '23456789TJQKA' and len(c)==1
 
     def FourKind(self,card):
-        p=[i[0] for i in card]
-        c=Counter(p)
-        s=max([c[i] for i in p])
-        return s==4
+        p=Counter([i[0] for i in card])        
+        c = sorted(''.join(list(str(p[i]) for i in p)))
+        return c == '14'
 
     def FullHouse(self,card): #3+3+3+2+2
-        p=[i[0] for i in card]
-        c=Counter(p)
-        s=sum([c[i] for i in p]) 
-        return s==13
+        p=Counter([i[0] for i in card])        
+        c = sorted(''.join(list(str(p[i]) for i in p)))
+        return c == '23'
 
     def Flush(self,card):
-        c=Counter([i[1] for i in card])
-        s=max([c[i] for i in 'DCHS'])
-        return s==5
+        ''' 如果花色数量为1 为同花'''        
+        c=Counter([i[1] for i in card])        
+        return len(c)==1
 
     def Straight(self,card):        
         return ''.join([i[0] for i in card]) in '23456789TJQKA'
 
-    def ThreeKind(self,card): #3+3+3+1+1
-        p=[i[0] for i in card]
-        c=Counter(p)
-        s=sum([c[i] for i in p])
-        return s==11
+    def ThreeKind(self,card): #3+1+1
+        p=Counter([i[0] for i in card])        
+        c = sorted(''.join(list(str(p[i]) for i in p)))
+        return c == '113'
 
     def TwoPairs(self,card): #2+2+2+2+1
-        p=[i[0] for i in card]
-        c=Counter(p)
-        s=sum([c[i] for i in p])
-        return s==9
+        p=Counter([i[0] for i in card])        
+        c = sorted(''.join(list(str(p[i]) for i in p)))
+        return c=='122'
 
     def OnePair(self,card): #2+2+1+1+1
-        s=10**5
-        p=[i[0] for i in card]
-        c=Counter(p)
-        s=sum([c[i] for i in p])
-        temp=c
-        for i in temp:
-            if c[i]==2:c.pop(i)
-        
-        for i in range(3):
-            for j in sorted([self.val[i[0]] for i in c]):
-                s+=j*10**i
-
-        return s
+        p=Counter([i[0] for i in card])        
+        c = sorted(''.join(list(str(p[i]) for i in p)))
+        return c=='1112'
 
     def HighCard(self,card):        
-        s=0
-        for i in range(5):
-            for j in sorted([self.val[i[0]] for i in card]):
-                s+=j*10**i
-        return s
+        return 0
 
 
 def problem_54(): #Diamond Club Heart Spade
-    d=data.openfile('poker.txt').read().split('\n')[:-1]    
-    s=0
-    log.info(len(d))     
-    for i in d[:-1]:
-        if poker(i).win():s=s+1
+    d=data.openfile('poker.txt').read().split('\n')
+    #log.info(d)
+    log.info(len(d))
+
+    s=0         
+    for i in d:
+        poker(i).win()
     return s
    
 
@@ -176,14 +162,17 @@ def problem_56():
             i_result=max(i_result,sum(int(k) for k in str(i**j)))
     return i_result    
             
-def problem_57():
-    l_t=[1]+[2]*99
-    l_t.reversed()
-    l_result=[1,l_t[0]]
-    del l_t[0]
-    for i in l_t:
-        l_result[0]=i*l_result[1]+l_result[0]
-        l_result.reverse()
+def problem_57(num=1000):
+    from fractions import Fraction
+    init = Fraction(1,2)
+    n = 0
+    for i in range(num-1):
+        init = 1/(2 + init)
+        #log.info(init+1)
+        if len(str((init+1).numerator))>len(str((init+1).denominator)):
+            n+=1
+    return n    
+
 def problem_59():
     i_str=list(next(data.openfile('cipher1.txt')).strip().split(','))    
     i_result=[]
