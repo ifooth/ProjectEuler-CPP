@@ -171,15 +171,57 @@ def problem_57(num=1000):
         #log.info(init+1)
         if len(str((init+1).numerator))>len(str((init+1).denominator)):
             n+=1
-    return n    
+    return n
 
-def problem_59():
-    i_str=list(next(data.openfile('cipher1.txt')).strip().split(','))    
-    i_result=[]
-    for i in itertools.combinations('abcdefghijklmnopqrstuvwxyz',3):
-        for j in (itertools.islice(i_str,k,k+3) for k in range(0,len(i_str),3)):
-            i_result.append(chr(m|n) for m in i for n in j)
-    return i_result            
+def problem_58(length=None):
+    if length:
+        for i in range(length):
+            pass    
+
+def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):
+    ciphertext=list(next(data.openfile('cipher1.txt')).strip().split(',')) 
+    #log.info(ciphertext)
+    #ciphertext=encipher('leijiaominabc','zzz')
+    #log.info(encipher('leijiaominabc','zzz'))
+    log.info(len(ciphertext))   
+    texts = []
+    a,b=divmod(len(ciphertext),keylen)
+    for i in itertools.product(keychars,repeat=keylen):
+        #log.info(i)
+        cleartext = ''        
+        for j in range(a):            
+            for k in range(keylen):               
+                t = int(ciphertext[keylen*j+k])^ord(i[k])                
+                #if chr(t) not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ() 123456789\',.':
+                #    break 
+                cleartext += chr(t)
+        if b:
+            for k in range(b):
+                t = int(ciphertext[keylen*a+k])^ord(i[k])
+                #if chr(t) not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ() 123456789\',.':
+                #    break
+                cleartext += chr(t)
+        #with open('p59.txt','a+') as fp:
+        #    fp.write('%s\n%s\n\n'%(i,cleartext))
+        #log.info(cleartext)
+        if '(The Gospel of John, chapter 1)' in cleartext:
+            log.info(cleartext)
+            log.info(len(cleartext))
+            return sum([ord(i) for i in cleartext])          
+        #texts += cleartext
+    return 'finish'    
+
+def encipher(texts,key):
+    #log.info(texts)
+    #log.info(key)
+    ciphertext = []
+    a,b = divmod(len(texts),len(key))    
+    for i in range(a):
+        ciphertext += [ord(texts[i*len(key)+j])^ord(key[j]) for j in range(len(key))]
+    if b:
+        ciphertext += [ord(texts[a*len(key)+j])^ord(key[j]) for j in range(b)]
+    return ciphertext
+
                                    
 
             
