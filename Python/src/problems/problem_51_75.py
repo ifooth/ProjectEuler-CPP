@@ -179,37 +179,33 @@ def problem_58(length=None):
             pass    
 
 def problem_59(keychars='abcdefghijklmnopqrstuvwxyz',keylen=3):
-    ciphertext=list(next(data.openfile('cipher1.txt')).strip().split(',')) 
-    #log.info(ciphertext)
+    ciphertext=list(next(data.openfile('cipher1.txt')).strip().split(','))     
     #ciphertext=encipher('leijiaominabc','zzz')
     #log.info(encipher('leijiaominabc','zzz'))
+    #log.info(ciphertext)
     log.info(len(ciphertext))   
-    texts = []
+    texts = ['',0]
     a,b=divmod(len(ciphertext),keylen)
-    for i in itertools.product(keychars,repeat=keylen):
-        #log.info(i)
-        cleartext = ''        
+    for i in itertools.product(keychars,repeat=keylen):        
+        cleartext = ''
+        space = 0        
         for j in range(a):            
             for k in range(keylen):               
-                t = int(ciphertext[keylen*j+k])^ord(i[k])                
-                #if chr(t) not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ() 123456789\',.':
-                #    break 
+                t = int(ciphertext[keylen*j+k])^ord(i[k])
+                if t == ord(' '):
+                    space += 1 
                 cleartext += chr(t)
         if b:
             for k in range(b):
                 t = int(ciphertext[keylen*a+k])^ord(i[k])
-                #if chr(t) not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ() 123456789\',.':
-                #    break
+                if t == ord(' '):
+                    space += 1 
                 cleartext += chr(t)
-        #with open('p59.txt','a+') as fp:
-        #    fp.write('%s\n%s\n\n'%(i,cleartext))
-        #log.info(cleartext)
-        if '(The Gospel of John, chapter 1)' in cleartext:
-            log.info(cleartext)
-            log.info(len(cleartext))
-            return sum([ord(i) for i in cleartext])          
-        #texts += cleartext
-    return 'finish'    
+        if space > texts[1]:
+            texts[1] = space
+            texts[0] = cleartext
+    log.info(texts)    
+    return sum([ord(i) for i in texts[0]])    
 
 def encipher(texts,key):
     #log.info(texts)
